@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const skillContents = document.querySelectorAll('.skill-content');
     let currentIndex = 0; // Start at the first skill (ETL)
-    const intervalTime = 2000; // 2 seconds
+    const intervalTime = 4000; // 2 seconds
 
     /**
      * Toggles the active state for the clicked/current skill.
