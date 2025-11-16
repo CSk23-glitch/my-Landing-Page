@@ -238,7 +238,7 @@ body {
     /* Push the content area to the left half */
     padding-right: 420px; 
     padding-left: 0;
-    text-align: right; 
+    text-align: left; 
 }
 
 /* RIGHT SIDE ITEMS (Even children) */
