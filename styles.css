@@ -177,6 +177,23 @@ body {
     animation: fadeIn 0.5s ease;
 }
 
+.skill-content {
+    display: none; /* Hide all content by default */
+}
+
+.skill-content.active {
+    display: block; /* Show only the active content */
+}
+
+.tab-btn {
+    opacity: 0.5; /* Dim inactive tabs */
+}
+
+.tab-btn.active {
+    opacity: 1.0; /* Highlight active tab */
+    font-weight: bold;
+}
+
 .skill-content.active {
     display: block;
 }
