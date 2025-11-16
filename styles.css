@@ -237,7 +237,7 @@ body {
 .timeline-item:nth-child(odd) {
     /* Push the content area to the left half */
     padding-right: 420px; 
-    padding-left: 0;
+    padding-left: 10px;
     text-align: left; 
 }
 
@@ -245,7 +245,7 @@ body {
 .timeline-item:nth-child(even) {
     /* Push the content area to the right half */
     padding-left: 420px; 
-    padding-right: 0;
+    padding-right: 10px;
     text-align: left;
 }
 
