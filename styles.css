@@ -77,6 +77,22 @@ body {
     border-bottom: 2px solid var(--primary-color);
 }
 
+/* Styling for the new logo box */
+.logo-box {
+    display: inline-block;
+    padding: 3px 8px; /* Reduced padding for tighter look */
+    background-color: var(--primary-color);
+    color: var(--background-dark);
+    font-size: 1.3em; 
+    font-weight: 900; 
+    line-height: 1;
+    /* Changed border-radius to 0 and added a subtle shadow for depth */
+    border-radius: 0; 
+    border-left: 2px solid var(--accent-color); /* Adds the "data marker" effect */
+    border-right: 2px solid var(--accent-color);
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.5); /* Glowing effect */
+}
+
 /* --- Hero Section & Stats Bar --- */
 .hero-section {
     padding: 100px 0;
