@@ -198,7 +198,8 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Experience Timeline --- */
+/* --- Experience Timeline (Flexbox Fix) --- */
+
 .timeline {
     position: relative;
     padding: 20px 0;
@@ -216,31 +217,39 @@ body {
     bottom: 0;
     left: 50%;
     margin-left: -1px;
+    z-index: 0; 
+}
+
+/* NEW: Flexbox wrapper to manage vertical stacking */
+.timeline-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
 }
 
 .timeline-item {
-    padding: 10px 40px;
     position: relative;
-    width: 50%;
-    /* FIX: Added margin-bottom and clear to prevent content overlap */
-    margin-bottom: 50px; /* Increased spacing between items */
-    clear: both; /* Crucial for vertical stacking management */
+    width: 100%; 
+    padding: 10px 0; /* Vertical padding only */
+    margin-bottom: 30px; /* Spacing between boxes */
 }
 
 /* LEFT SIDE ITEMS (Odd children) */
 .timeline-item:nth-child(odd) {
-    left: 0;
-    text-align: right; /* Use right alignment for left items */
-    float: left; /* Helps with clearing and flow management */
+    /* Push the content area to the left half */
+    padding-right: 420px; 
+    padding-left: 0;
+    text-align: right; 
 }
 
 /* RIGHT SIDE ITEMS (Even children) */
 .timeline-item:nth-child(even) {
-    left: 50%; 
+    /* Push the content area to the right half */
+    padding-left: 420px; 
+    padding-right: 0;
     text-align: left;
-    float: right; /* Helps with clearing and flow management */
 }
 
+/* The Content Box itself */
 .timeline-content {
     background: var(--card-dark);
     padding: 15px;
@@ -248,21 +257,23 @@ body {
     position: relative;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
-    /* Height adjusts automatically based on content */
+    /* This must be less than the padding value (420px) to prevent overflow */
+    max-width: 380px; 
 }
 
-.timeline-item:hover .timeline-content {
-    transform: scale(1.02);
+/* Position LEFT content box */
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-left: auto; /* Pushes the box to the right edge of its half */
+    margin-right: 0;
 }
 
-.timeline-content h3 {
-    color: var(--primary-color);
-    margin-bottom: 5px;
+/* Position RIGHT content box */
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: 0;
+    margin-right: auto;
 }
-.timeline-content ul {
-    list-style-type: '• ';
-    padding-left: 20px;
-}
+
+/* DOT POSITIONING - Now relative to the center line */
 
 .timeline-dot {
     position: absolute;
@@ -270,23 +281,22 @@ body {
     height: 15px;
     background: var(--accent-color);
     border: 3px solid var(--background-dark);
-    top: 25px;
+    top: 35px;
     border-radius: 50%;
     z-index: 1;
 }
 
-/* Positioning dots on the line for LEFT items */
+/* LEFT DOT */
 .timeline-item:nth-child(odd) .timeline-dot { 
-    right: -7.5px; 
-    left: auto; 
+    right: 50%; 
+    transform: translateX(calc(15px / 2)); /* Center the 15px dot */
 }
 
-/* Positioning dots on the line for RIGHT items */
+/* RIGHT DOT */
 .timeline-item:nth-child(even) .timeline-dot { 
-    left: -7.5px; 
-    right: auto; 
+    left: 50%; 
+    transform: translateX(calc(-15px / 2)); /* Center the 15px dot */
 }
-
 /* --- Projects Grid (Interactive Card Flip) --- */
 .project-cards-wrapper {
     display: grid;
