@@ -1,4 +1,4 @@
-/* --- Variables & Base Styling (Retain Dark Theme) --- */
+/* Base Styling & Reset */
 :root {
     --primary-color: #00bcd4; /* Cyan/Teal for a tech/data look */
     --accent-color: #ff9800;  /* Orange for highlights/success */
@@ -8,31 +8,68 @@
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--font-family);
     background-color: var(--background-dark);
     color: var(--text-light);
     line-height: 1.6;
-    scroll-behavior: smooth; /* Smooth scrolling for navigation */
+    scroll-behavior: smooth;
 }
 
-/* ... (Include basic reset and .container from previous answer) ... */
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+}
 
-/* --- Navigation & Header --- */
+.section {
+    padding: 60px 0; /* Increased padding for better separation */
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+}
+
+/* --- Navigation --- */
 .navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
     background: rgba(18, 18, 18, 0.95);
-    backdrop-filter: blur(5px); /* Modern look */
+    backdrop-filter: blur(5px);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    transition: background-color 0.3s;
+    padding: 15px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--text-light);
 }
 
 .navbar a {
     color: var(--text-light);
-    transition: color 0.3s, border-bottom 0.3s;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-left: 20px;
     padding-bottom: 5px;
+    transition: color 0.3s, border-bottom 0.3s;
 }
 
 .navbar a:hover, .navbar a.active {
@@ -40,11 +77,11 @@ body {
     border-bottom: 2px solid var(--primary-color);
 }
 
-/* --- Hero Section & Stats Bar (Interactive) --- */
+/* --- Hero Section & Stats Bar --- */
 .hero-section {
     padding: 100px 0;
     text-align: center;
-    min-height: 60vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,7 +116,7 @@ body {
 }
 
 .stat-item:hover {
-    transform: translateY(-5px); /* Micro-interaction */
+    transform: translateY(-5px); 
 }
 
 .stat-item span {
@@ -120,7 +157,7 @@ body {
     background: var(--card-dark);
     padding: 25px;
     border-radius: 8px;
-    display: none; /* Hide all by default */
+    display: none;
     animation: fadeIn 0.5s ease;
 }
 
@@ -133,7 +170,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Experience Timeline (Visual Flow) --- */
+/* --- Experience Timeline --- */
 .timeline {
     position: relative;
     padding: 20px 0;
@@ -141,7 +178,8 @@ body {
     max-width: 800px;
 }
 
-.timeline::after { /* The connecting line */
+/* The connecting vertical line */
+.timeline::after {
     content: '';
     position: absolute;
     width: 2px;
@@ -156,13 +194,16 @@ body {
     padding: 10px 40px;
     position: relative;
     width: 50%;
-    /* Alternating sides for flow */
+    
+    /* LEFT SIDE ITEMS (Odd children) */
     &:nth-child(odd) {
         left: 0;
-        text-align: right;
+        text-align: right; 
     }
+    
+    /* RIGHT SIDE ITEMS (Even children) */
     &:nth-child(even) {
-        left: 50%;
+        left: 50%; 
         text-align: left;
     }
 }
@@ -172,11 +213,21 @@ body {
     padding: 15px;
     border-radius: 6px;
     position: relative;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
 }
+
 .timeline-item:hover .timeline-content {
     transform: scale(1.02);
+}
+
+.timeline-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+.timeline-content ul {
+    list-style-type: '• ';
+    padding-left: 20px;
 }
 
 .timeline-dot {
@@ -184,10 +235,11 @@ body {
     width: 15px;
     height: 15px;
     background: var(--accent-color);
-    border: 2px solid var(--background-dark);
+    border: 3px solid var(--background-dark);
     top: 25px;
     border-radius: 50%;
     z-index: 1;
+
     /* Positioning dots on the line */
     .timeline-item:nth-child(odd) & { right: -7.5px; }
     .timeline-item:nth-child(even) & { left: -7.5px; }
@@ -198,7 +250,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    perspective: 1000px; /* Needed for 3D flip effect */
+    perspective: 1000px;
 }
 
 .interactive-card {
@@ -211,14 +263,14 @@ body {
 }
 
 .interactive-card:hover {
-    transform: rotateY(180deg); /* The flip animation */
+    transform: rotateY(180deg);
 }
 
 .card-front, .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; /* Hide the backside when facing away */
+    backface-visibility: hidden;
     border-radius: 8px;
     padding: 20px;
     display: flex;
@@ -240,7 +292,82 @@ body {
     background: var(--card-dark);
     color: var(--text-light);
     border: 1px solid var(--primary-color);
-    transform: rotateY(180deg); /* Start hidden */
+    transform: rotateY(180deg);
 }
-.card-back p { margin-bottom: 15px; }
-.repo-link { color: var(--accent-color); text-decoration: none; font-weight: bold; }
+
+/* --- Footer --- */
+.footer {
+    background: #111;
+    color: #ccc;
+    text-align: center;
+    padding: 40px 0;
+    margin-top: 50px;
+    border-top: 3px solid var(--primary-color);
+}
+
+.footer h3 {
+    color: var(--text-light);
+    margin-bottom: 15px;
+}
+
+.social-links {
+    margin: 20px 0;
+}
+
+.social-icon {
+    color: var(--primary-color);
+    font-size: 1.8em;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: var(--accent-color);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+    }
+    .navbar nav {
+        margin-top: 10px;
+    }
+    .navbar a {
+        margin: 0 5px;
+        font-size: 0.8em;
+    }
+    .hero-content h2 {
+        font-size: 2.5em;
+    }
+    .stats-bar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Timeline Mobile Override (Single Column) */
+    .timeline::after {
+        left: 20px; /* Move vertical line to the left */
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px; /* Space for the line and dot */
+        padding-right: 10px;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0; /* Align all boxes to the left */
+        text-align: left;
+    }
+
+    .timeline-dot {
+        left: 17px; /* Position dot on the new line */
+        right: auto;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: 17px;
+    }
+}
