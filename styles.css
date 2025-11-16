@@ -218,7 +218,7 @@ body {
 /* LEFT SIDE ITEMS (Odd children) */
 .timeline-item:nth-child(odd) {
     left: 0;
-    text-align: right; 
+    text-align: left; 
     clear: both;
 }
 
