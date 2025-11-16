@@ -57,11 +57,19 @@ body {
     align-items: center;
 }
 
-.navbar .logo {
-    font-size: 1.8em;
-    font-weight: bold;
+/* NEW: Container for logo elements */
+.branding {
+    display: flex;
+    align-items: center;
+}
+
+.full-name {
+    font-size: 1.5em; 
+    font-weight: 500;
     color: var(--text-light);
 }
+
+/* Original .navbar .logo rule removed as it's replaced by .branding and .full-name */
 
 .navbar a {
     color: var(--text-light);
@@ -86,11 +94,11 @@ body {
     font-size: 1.3em; 
     font-weight: 900; 
     line-height: 1;
-    /* Changed border-radius to 0 and added a subtle shadow for depth */
     border-radius: 0; 
     border-left: 2px solid var(--accent-color); /* Adds the "data marker" effect */
     border-right: 2px solid var(--accent-color);
     box-shadow: 0 0 8px rgba(0, 188, 212, 0.5); /* Glowing effect */
+    margin-right: 10px; /* Space between box and full name */
 }
 
 /* --- Hero Section & Stats Bar --- */
@@ -164,6 +172,8 @@ body {
     opacity: 0.5; /* Dim inactive tabs */
 }
 
+
+
 .tab-btn.active {
     background-color: var(--primary-color);
     color: var(--background-dark);
@@ -212,21 +222,23 @@ body {
     padding: 10px 40px;
     position: relative;
     width: 50%;
-    margin-bottom: 40px;
+    /* FIX: Added margin-bottom and clear to prevent content overlap */
+    margin-bottom: 50px; /* Increased spacing between items */
+    clear: both; /* Crucial for vertical stacking management */
 }
 
 /* LEFT SIDE ITEMS (Odd children) */
 .timeline-item:nth-child(odd) {
     left: 0;
-    text-align: left; 
-    clear: both;
+    text-align: right; /* Use right alignment for left items */
+    float: left; /* Helps with clearing and flow management */
 }
 
 /* RIGHT SIDE ITEMS (Even children) */
 .timeline-item:nth-child(even) {
     left: 50%; 
     text-align: left;
-    clear: both;
+    float: right; /* Helps with clearing and flow management */
 }
 
 .timeline-content {
@@ -263,16 +275,16 @@ body {
     z-index: 1;
 }
 
-/* Positioning dots on the line for LEFT items (formerly nested SCSS) */
+/* Positioning dots on the line for LEFT items */
 .timeline-item:nth-child(odd) .timeline-dot { 
     right: -7.5px; 
-    left: auto; /* Ensure no conflict */
+    left: auto; 
 }
 
-/* Positioning dots on the line for RIGHT items (formerly nested SCSS) */
+/* Positioning dots on the line for RIGHT items */
 .timeline-item:nth-child(even) .timeline-dot { 
     left: -7.5px; 
-    right: auto; /* Ensure no conflict */
+    right: auto; 
 }
 
 /* --- Projects Grid (Interactive Card Flip) --- */
@@ -390,6 +402,7 @@ body {
     .timeline-item:nth-child(even) {
         left: 0; /* Align all boxes to the left */
         text-align: left;
+        float: none; /* Remove float in mobile view */
     }
 
     .timeline-dot {
