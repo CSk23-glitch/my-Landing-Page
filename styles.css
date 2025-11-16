@@ -1,7 +1,7 @@
 /* Base Styling & Reset */
 :root {
     --primary-color: #00bcd4; /* Cyan/Teal for a tech/data look */
-    --accent-color: #ff9800;  /* Orange for highlights/success */
+    --accent-color: #ff9800; /* Orange for highlights/success */
     --background-dark: #121212;
     --card-dark: #1f1f1f;
     --text-light: #e0e0e0;
@@ -161,41 +161,26 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    opacity: 0.5; /* Dim inactive tabs */
 }
 
 .tab-btn.active {
     background-color: var(--primary-color);
     color: var(--background-dark);
     font-weight: bold;
+    opacity: 1.0; /* Highlight active tab */
 }
 
 .skill-content {
     background: var(--card-dark);
     padding: 25px;
     border-radius: 8px;
-    display: none;
-    animation: fadeIn 0.5s ease;
-}
-
-.skill-content {
     display: none; /* Hide all content by default */
+    animation: fadeIn 0.5s ease;
 }
 
 .skill-content.active {
     display: block; /* Show only the active content */
-}
-
-.tab-btn {
-    opacity: 0.5; /* Dim inactive tabs */
-}
-
-.tab-btn.active {
-    opacity: 1.0; /* Highlight active tab */
-    font-weight: bold;
-}
-
-.skill-content.active {
-    display: block;
 }
 
 @keyframes fadeIn {
@@ -227,18 +212,18 @@ body {
     padding: 10px 40px;
     position: relative;
     width: 50%;
-    
-    /* LEFT SIDE ITEMS (Odd children) */
-    &:nth-child(odd) {
-        left: 0;
-        text-align: right; 
-    }
-    
-    /* RIGHT SIDE ITEMS (Even children) */
-    &:nth-child(even) {
-        left: 50%; 
-        text-align: left;
-    }
+}
+
+/* LEFT SIDE ITEMS (Odd children) */
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right; 
+}
+
+/* RIGHT SIDE ITEMS (Even children) */
+.timeline-item:nth-child(even) {
+    left: 50%; 
+    text-align: left;
 }
 
 .timeline-content {
@@ -248,6 +233,7 @@ body {
     position: relative;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
+    /* Height adjusts automatically based on content */
 }
 
 .timeline-item:hover .timeline-content {
@@ -272,10 +258,18 @@ body {
     top: 25px;
     border-radius: 50%;
     z-index: 1;
+}
 
-    /* Positioning dots on the line */
-    .timeline-item:nth-child(odd) & { right: -7.5px; }
-    .timeline-item:nth-child(even) & { left: -7.5px; }
+/* Positioning dots on the line for LEFT items (formerly nested SCSS) */
+.timeline-item:nth-child(odd) .timeline-dot { 
+    right: -7.5px; 
+    left: auto; /* Ensure no conflict */
+}
+
+/* Positioning dots on the line for RIGHT items (formerly nested SCSS) */
+.timeline-item:nth-child(even) .timeline-dot { 
+    left: -7.5px; 
+    right: auto; /* Ensure no conflict */
 }
 
 /* --- Projects Grid (Interactive Card Flip) --- */
@@ -402,5 +396,6 @@ body {
     .timeline-item:nth-child(odd) .timeline-dot,
     .timeline-item:nth-child(even) .timeline-dot {
         left: 17px;
+        right: auto; /* Crucial to reset right */
     }
 }
